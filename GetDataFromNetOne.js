@@ -18,6 +18,18 @@ var RToast=NativeModules.Toast;
 var REQUEST_URL='http://gc.ditu.aliyun.com/geocoding?a=';
 var REQUEST_URL_ONE='http://gc.ditu.aliyun.com/geocoding?a=苏州市';
 var oneData='';
+var cityMessageObj;
+
+class cityMessage {
+  constructor(lon,level,address,cityName,alevel,lat) {
+    this.lon=lon;
+    this.level=level;
+    this.address=(address===''?'地址':address);
+    this.cityName=(cityName===''?'城市名称':cityName);
+    this.alevel=alevel;
+    this.lat=lat;
+  }
+}
 
 class GetDataFromNetOne extends React.Component {
 
@@ -50,6 +62,19 @@ class GetDataFromNetOne extends React.Component {
               shanghailat:shanghai.lat,
               shanghailevel:shanghai.level,
               shanghaialevel:shanghai.alevel,
+          });
+        })
+      .catch((error) => {
+        console.warn(error);
+      }).done();
+  }
+
+  fetchFourData(city){
+    fetch(REQUEST_URL+city)
+      .then((response) => response.json())
+      .then((sjz) => {
+          this.setState({
+             cityMessageObj:sjz.lon,
           });
         })
       .catch((error) => {
@@ -96,6 +121,9 @@ class GetDataFromNetOne extends React.Component {
          break;
        case 'three':
           this.fetchThreeData('上海市');
+        break;
+      case 'four':
+          this.fetchFourData('石家庄市');
         break;
        default:
 
@@ -173,6 +201,21 @@ class GetDataFromNetOne extends React.Component {
 
           <Text >
             lat:{this.state.shanghailat}
+          </Text>
+
+          <TouchableOpacity//响应用户点击操作
+            style={styles.wrapper}
+            onPress={() => this._onListener("four")}
+            >
+            <View style={styles.buttonStyle}>
+              <Text style={{fontSize:20}}>
+                封装一个对象（获取石家庄地址）
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <Text >
+            石家庄地址信息:{}
           </Text>
 
         </ScrollView>
