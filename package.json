@@ -1,0 +1,16 @@
+{
+  "name": "someproject",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-native": "github:facebook/react-native#master",
+    "react-native-tab-navigator": "^0.2.18",
+    "react-native-viewpager": "^0.2.1"
+  }
+}
