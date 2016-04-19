@@ -14,6 +14,7 @@ var{
   TouchableHighlight,
   TouchableOpacity,
   Alert,
+  QiuFu,
 } = React;
 
 import SenceA from './SenceA';
@@ -29,6 +30,7 @@ import BottomScreen from './viewpagerdemo/BottomScreen';
 import LayoutDemo from './LayoutDemo';
 import MainScreen from './MainScreen';
 import GetDataFromNetOne from './GetDataFromNetOne';
+import QiuFuApp from './QiuFuApp';
 
 export default class SenceC extends React.Component{
 
@@ -160,6 +162,14 @@ export default class SenceC extends React.Component{
             component:GetDataFromNetOne,
           });
         }
+        break;
+      case 'qiufu':
+          if(navigator){
+              navigator.push({
+                name:'QiuFuApp',
+                component:QiuFuApp,
+              });
+            }
         break;
 
       default:
@@ -327,6 +337,17 @@ export default class SenceC extends React.Component{
             <View style={styles.buttonStyle}>
               <Text style={{fontSize:20}}>
                 测试从网络获取数据
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity//响应用户点击操作
+            style={styles.wrapper}
+            onPress={() => this._onListener('qiufu')}
+            >
+            <View style={styles.buttonStyle}>
+              <Text style={{fontSize:20}}>
+                求福网络首页
               </Text>
             </View>
           </TouchableOpacity>
